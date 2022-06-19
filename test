@@ -1,0 +1,79 @@
+public class ChickenCounter
+{
+   //Create two constructor methods here, one with no parameter and one with one parameter
+    private String word;
+    private int length;
+    private int x;
+    public ChickenCounter()
+{
+  word = "chicken";
+  length = 7;
+  x = 0;
+}
+public ChickenCounter(String z)
+{
+ word = z;
+ length = word.length();
+ x = 0;
+}
+// The parameter bigString below should contain the long string that you want to find the word chicken in
+public int countChickens(String bigString)   
+{
+    if(bigString.length() <= length)
+    {
+        if(bigString.equals(word))
+        {
+            return 1;
+        }
+
+        else
+        {
+            String temp = bigString.substring(x, length-1);//line that is highlighted when given the error 
+            if(temp.equals(word))
+            {
+                bigString = bigString.substring(x, bigString.indexOf(word)) + bigString.substring(bigString.indexOf(word)); //dont know if this is the correct syntax of the method indexOf()
+                return countChickens(bigString) + 1;
+            }
+            else
+            {
+                x++;
+                return countChickens(bigString); //this line is also part of the problem
+            }
+        }
+    }
+      return 0;
+   }
+}
+
+
+import static java.lang.System.*;
+
+
+public class ChickenCounterTester
+{
+    public static void main(String args[])
+    {
+        ChickenCounter counter = new ChickenCounter();
+
+    System.out.println(counter.countChickens("itatfun")); //0 <--what it supposed to output
+
+    System.out.println(counter.countChickens("itatchickenfun")); //1
+
+    System.out.println(counter.countChickens("chchickchickenenicken")); //3
+
+    System.out.println(counter.countChickens("chickchickfun")); //0
+
+    System.out.println(counter.countChickens("chickenbouncetheballchicken")); //2       
+
+
+    //pass the word to search for to the object
+
+     counter = new ChickenCounter("java");
+
+    System.out.println("");
+
+    System.out.println(counter.countChickens("jjajavavaavaisfun")); //3 
+
+    System.out.println(counter.countChickens("I want some jajavava")); //2
+
+}
